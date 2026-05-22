@@ -76,7 +76,7 @@ int main() {
             //
             if(typeCom(line)==-1)
             {
-                std::cout<<potentialcommand<<": not found";
+                std::cout<<potentialcommand<<": not found"<<std::endl;
             }
         }
     }
