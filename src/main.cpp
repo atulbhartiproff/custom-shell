@@ -36,32 +36,9 @@ int main() {
         }
         std::cout << std::endl;
       } else {
-        std::string inp = line.substr(5, line.size());
-        bool openQuo = false;
-        std::string word = "";
-        for (int i = 0; i < inp.size(); i++) {
-          if (inp[i] == '\'') {
-            if (openQuo) {
-              openQuo = !(openQuo);
-              if (i + 1 < inp.size() && inp[i + 1] == '\'') {
-                i += 1;
-                continue;
-              } else {
-                std::cout << " " << word;
-                word = "";
-              }
-            } else {
-              openQuo = !(openQuo);
-              word = "";
-            }
-          }
-          else {
-          {
-              word=word+""+(inp[i]);
-          }
-          }
-        }
-      }
+          std::string inp=line.substr(5,line.size());
+          std::cout<<inp<<std::endl;
+    }
     }
 
     // TYPE COMMAND - Validates if the proceeding input is a valid command.
