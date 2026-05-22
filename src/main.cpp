@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -56,24 +55,6 @@ int main() {
 
         if(!found)
         {
-            // std::string path_env = std::getenv("PATH");
-            // std::stringstream sp(path_env);
-            // std::string path;
-            // while(std::getline(sp,path,':'))
-            // {
-            //     std::string fullPath=path+"/"+potentialcommand;
-            //     if(access(fullPath.c_str(), X_OK)==0)
-            //     {
-            //         std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
-            //         found=true;
-            //         break;
-            //     }
-            // }
-
-
-            // if(!found)
-            //     std::cout << potentialcommand << ": not found" << std::endl;
-            //
             if(typeCom(line)==-1)
             {
                 std::cout<<potentialcommand<<": not found"<<std::endl;
