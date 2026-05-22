@@ -39,14 +39,36 @@ int main() {
       } else {
           std::string inp=line.substr(5,line.size());
           std::string word="";
+          std::string finalword="";
+          bool openQuo=false;
           for(int i=0;i<inp.size();i++)
           {
               if(inp[i]!='\'')
               {
                   word=word+""+inp[i];
               }
+              else {
+                    if(inp[i+1]=='\'')
+                    {
+                        i+=1;
+                        continue;
+                    }
+                    else {
+                        if(openQuo)
+                        {
+                            openQuo=false;
+                            if(finalword.size()==0) finalword=word;
+                            else finalword=finalword+" "+word;
+                        }
+                        else
+                        {
+                            openQuo=true;
+                            word="";
+                        }
+                    }
+              }
           }
-          std::cout<<word<<std::endl;
+          std::cout<<finalword<<std::endl;
     }
     }
 
