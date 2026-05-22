@@ -39,7 +39,7 @@ int main() {
     else if (command == "type") {
         bool found=false;
         std::string potentialcommand;
-        std::vector<std::string>knownCom={"type","echo","exit"};
+        std::vector<std::string>knownCom={"type","echo","exit","pwd"};
         ss>>potentialcommand;
 
 
@@ -61,7 +61,10 @@ int main() {
             }
         }
     }
-
+    else if(command=="pwd")
+    {
+        std::cout<<get_current_dir_name()<<std::endl;
+    }
 
     //Invalid parameter
     else
