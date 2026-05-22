@@ -92,7 +92,7 @@ int main() {
                 {
                     finalcom=finalcom+" "+arg;
                 }
-                std::system(finalcom.c_str());
+                std::system(line.c_str());
                 found=true;
                 break;
             }
