@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unistd.h>
+#include "exec_handler.hpp"
 
 int main() {
   // Flush after every std::cout / std:cerr
@@ -54,22 +55,28 @@ int main() {
 
         if(!found)
         {
-            std::string path_env = std::getenv("PATH");
-            std::stringstream sp(path_env);
-            std::string path;
-            while(std::getline(sp,path,':'))
+            // std::string path_env = std::getenv("PATH");
+            // std::stringstream sp(path_env);
+            // std::string path;
+            // while(std::getline(sp,path,':'))
+            // {
+            //     std::string fullPath=path+"/"+potentialcommand;
+            //     if(access(fullPath.c_str(), X_OK)==0)
+            //     {
+            //         std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
+            //         found=true;
+            //         break;
+            //     }
+            // }
+
+
+            // if(!found)
+            //     std::cout << potentialcommand << ": not found" << std::endl;
+            //
+            if(executeCom(line)==-1)
             {
-                std::string fullPath=path+"/"+potentialcommand;
-                if(access(fullPath.c_str(), X_OK)==0)
-                {
-                    std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
-                    found=true;
-                    break;
-                }
+                std::cout<<potentialcommand<<": not found"<<std::endl;
             }
-
-
-            if(!found)std::cout << potentialcommand << ": not found" << std::endl;
         }
     }
 
