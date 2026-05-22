@@ -66,6 +66,15 @@ int main() {
         std::cout<<get_current_dir_name()<<std::endl;
     }
 
+    else if(command=="cd")
+    {
+        std::string targetDir;
+        ss>>targetDir;
+        if(chdir(targetDir.c_str())!=0)
+        {
+            std::cout<<"cd: "<<targetDir<<": No such file or directory"<<std::endl;
+        }
+    }
     //Invalid parameter
     else
     {
