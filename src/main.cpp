@@ -1,11 +1,12 @@
+#include "exec_handler.hpp"
+#include "type_handler.hpp"
+#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <vector>
 #include <unistd.h>
-#include "exec_handler.hpp"
-#include "type_handler.hpp"
+#include <vector>
 
 int main() {
   // Flush after every std::cout / std:cerr
@@ -20,74 +21,72 @@ int main() {
 
     std::getline(std::cin, line);
     std::stringstream ss(line);
-    ss>>command;
+    ss >> command;
 
-    //EXIT COMMAND - Exits the shell
+    // EXIT COMMAND - Exits the shell
     if (command == "exit")
       break;
 
-    //ECHO COMMAND - Repeats the proceeding input
+    // ECHO COMMAND - Repeats the proceeding input
     else if (command == "echo") {
-      std::string word;
-      while(ss>>word)
+      if (line.find("\'") == std::string::npos) {
+        std::string word;
+        while (ss >> word) {
+          std::cout << word << " ";
+        }
+        std::cout << std::endl;
+      }
+      else {
+          std::string word;
+      while(getline(ss, word,'\''))
       {
           std::cout<<word<<" ";
       }
       std::cout<<std::endl;
+      }
     }
 
-    //TYPE COMMAND - Validates if the proceeding input is a valid command.
+    // TYPE COMMAND - Validates if the proceeding input is a valid command.
     else if (command == "type") {
-        bool found=false;
-        std::string potentialcommand;
-        std::vector<std::string>knownCom={"type","echo","exit","pwd"};
-        ss>>potentialcommand;
+      bool found = false;
+      std::string potentialcommand;
+      std::vector<std::string> knownCom = {"type", "echo", "exit", "pwd"};
+      ss >> potentialcommand;
 
-
-        for(int i=0;i<knownCom.size();i++)
-        {
-            if (potentialcommand == knownCom[i])
-            {
-                std::cout << potentialcommand << " is a shell builtin" << std::endl;
-                found=true;
-                break;
-            }
+      for (int i = 0; i < knownCom.size(); i++) {
+        if (potentialcommand == knownCom[i]) {
+          std::cout << potentialcommand << " is a shell builtin" << std::endl;
+          found = true;
+          break;
         }
+      }
 
-        if(!found)
-        {
-            if(typeCom(line)==-1)
-            {
-                std::cout<<potentialcommand<<": not found"<<std::endl;
-            }
+      if (!found) {
+        if (typeCom(line) == -1) {
+          std::cout << potentialcommand << ": not found" << std::endl;
         }
-    }
-    else if(command=="pwd")
-    {
-        std::cout<<get_current_dir_name()<<std::endl;
+      }
+    } else if (command == "pwd") {
+      std::cout << get_current_dir_name() << std::endl;
     }
 
-    else if(command=="cd")
-    {
-        std::string targetDir;
-        ss>>targetDir;
-        if(targetDir=="~")
-        {
-            std::string homeDir=std::getenv("HOME");
-            targetDir=homeDir;
-        }
-        if(chdir(targetDir.c_str())!=0)
-        {
-            std::cout<<"cd: "<<targetDir<<": No such file or directory"<<std::endl;
-        }
+    else if (command == "cd") {
+      std::string targetDir;
+      ss >> targetDir;
+      if (targetDir == "~") {
+        std::string homeDir = std::getenv("HOME");
+        targetDir = homeDir;
+      }
+      if (chdir(targetDir.c_str()) != 0) {
+        std::cout << "cd: " << targetDir << ": No such file or directory"
+                  << std::endl;
+      }
     }
-    //Invalid parameter
-    else
-    {
-        if(executeCom(line)==-1)
-        {
-            std::cout<<command<<": command not found"<<std::endl;
-        }
+    // Invalid parameter
+    else {
+      if (executeCom(line) == -1) {
+        std::cout << command << ": command not found" << std::endl;
+      }
     };
   }
 }
