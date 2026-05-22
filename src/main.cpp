@@ -19,7 +19,7 @@ int main() {
     {
         std::string inp=command.substr(5,command.size());
         if(inp =="echo" || inp=="exit" || inp=="type") std::cout<<inp<<" is a shell builtin"<<std::endl;
-        else std::cout<<inp<<": not found";
+        else std::cout<<inp<<": not found"<<std::endl;
     }
     else
     std::cout << command << ": command not found" << std::endl;
