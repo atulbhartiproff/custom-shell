@@ -62,7 +62,7 @@ int main() {
                 std::string fullPath=path+"/"+potentialcommand;
                 if(access(fullPath.c_str(), X_OK)==0)
                 {
-                    std::cout<<potentialcommand<<" is  "<<fullPath<<std::endl;
+                    std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
                     found=true;
                     break;
                 }
