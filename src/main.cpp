@@ -1,5 +1,6 @@
 #include "exec_handler.hpp"
 #include "type_handler.hpp"
+#include "quote_handler.hpp"
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
@@ -30,65 +31,66 @@ int main() {
 
     // ECHO COMMAND - Repeats the proceeding input
     else if (command == "echo") {
-      if (line.find("\'") == std::string::npos) {
-        std::string word;
-        while (ss >> word) {
-          std::cout << word << " ";
-        }
-        std::cout << std::endl;
-      } else {
-          std::string inp=line.substr(5,line.size());
-          std::string word="";
-          std::string finalword="";
-          bool openQuo=false;
-          for(int i=0;i<inp.size();i++)
-          {
-              if(inp[i]!='\'')
-              {
-                  if(openQuo)
-                      word=word+""+inp[i];
-                  else
-                  {
-                      if(inp[i]==' ' && word.size()!=0)
-                      {
-                          finalword=finalword+" "+word;
-                          word="";
-                      }
-                      else if(inp[i]==' ')
-                      {
-                          continue;
-                      }
-                      else
-                      {
-                          word=word+""+inp[i];
-                      }
-                  }
-              }
-              else {
-                    if(inp[i+1]=='\'')
-                    {
-                        i+=1;
-                        continue;
-                    }
-                    else {
-                        if(openQuo)
-                        {
-                            openQuo=false;
-                            if(finalword.size()==0) finalword=word;
-                            else finalword=finalword+" "+word;
-                            word="";
-                        }
-                        else
-                        {
-                            openQuo=true;
-                            word="";
-                        }
-                    }
-              }
-          }
-          if(word.size()!=0) finalword=finalword+" "+word;
-          std::cout<<finalword<<std::endl;
-    }
+    //   if (line.find("\'") == std::string::npos) {
+    //     std::string word;
+    //     while (ss >> word) {
+    //       std::cout << word << " ";
+    //     }
+    //     std::cout << std::endl;
+    //   } else {
+    //       std::string inp=line.substr(5,line.size());
+    //       std::string word="";
+    //       std::string finalword="";
+    //       bool openQuo=false;
+    //       for(int i=0;i<inp.size();i++)
+    //       {
+    //           if(inp[i]!='\'')
+    //           {
+    //               if(openQuo)
+    //                   word=word+""+inp[i];
+    //               else
+    //               {
+    //                   if(inp[i]==' ' && word.size()!=0)
+    //                   {
+    //                       finalword=finalword+" "+word;
+    //                       word="";
+    //                   }
+    //                   else if(inp[i]==' ')
+    //                   {
+    //                       continue;
+    //                   }
+    //                   else
+    //                   {
+    //                       word=word+""+inp[i];
+    //                   }
+    //               }
+    //           }
+    //           else {
+    //                 if(inp[i+1]=='\'')
+    //                 {
+    //                     i+=1;
+    //                     continue;
+    //                 }
+    //                 else {
+    //                     if(openQuo)
+    //                     {
+    //                         openQuo=false;
+    //                         if(finalword.size()==0) finalword=word;
+    //                         else finalword=finalword+" "+word;
+    //                         word="";
+    //                     }
+    //                     else
+    //                     {
+    //                         openQuo=true;
+    //                         word="";
+    //                     }
+    //                 }
+    //           }
+    //       }
+    //       if(word.size()!=0) finalword=finalword+" "+word;
+    //       std::cout<<finalword<<std::endl;
+    // }
+    if(echoHandle(line)==1) continue;
     }
 
     // TYPE COMMAND - Validates if the proceeding input is a valid command.
