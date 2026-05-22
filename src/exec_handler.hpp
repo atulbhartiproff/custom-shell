@@ -1,11 +1,10 @@
 
 #include <cstdlib>
-#include<iostream>
 #include <sstream>
 #include <string>
 #include<unistd.h>
 
-int executeCom(std::string& command)
+inline int executeCom(std::string& command)
 {
     std::stringstream ss(command);
     std::string file;
