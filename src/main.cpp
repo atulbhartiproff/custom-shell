@@ -87,7 +87,12 @@ int main() {
             if(access(fullPath.c_str(), X_OK)==0)
             {
                 std::string arg1,arg2;
-                ss>>arg1;ss>>arg2;
+                ss>>arg1;
+                if(!(ss>>arg2))
+                {
+                    arg2=arg1;
+                    arg1=command;
+                }
                 execlp(fullPath.c_str(), arg1.c_str(), arg2.c_str(),NULL);
                 found=true;
                 break;
