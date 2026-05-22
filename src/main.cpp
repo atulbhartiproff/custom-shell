@@ -93,9 +93,9 @@ int main() {
                     if(!(ss>>args[i++])) break;
                 }
                 std::vector<char*> argspoint;
-                for(i=0;i<args.size();i++)
+                for(auto& arg:args)
                 {
-                    argspoint.push_back(&args[i][0]);
+                    argspoint.push_back(&arg[0]);
                 }
                 execvp(fullPath.c_str(),argspoint.data());
                 found=true;
