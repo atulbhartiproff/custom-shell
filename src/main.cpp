@@ -54,7 +54,7 @@ int main() {
 
         if(!found)
         {
-            std::string path_env = std:getenv("PATH");
+            std::string path_env = std::getenv("PATH");
             std::stringstream sp(path_env);
             std::string path;
             while(std::getline(sp,path,':'))
