@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <ostream>
 #include <sstream>
 #include <string>
 #include <unistd.h>
@@ -37,7 +38,15 @@ int main() {
         std::cout << std::endl;
       } else {
           std::string inp=line.substr(5,line.size());
-          std::cout<<inp<<std::endl;
+          std::string word="";
+          for(int i=0;i<inp.size();i++)
+          {
+              if(inp[i]!='\'')
+              {
+                  word=word+""+inp[i];
+              }
+          }
+          std::cout<<word<<std::endl;
     }
     }
 
