@@ -57,7 +57,7 @@ int main() {
           }
           else {
           {
-              word=word+std::to_string(inp[i]);
+              word=word+""+(inp[i]);
           }
           }
         }
