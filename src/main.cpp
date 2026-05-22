@@ -60,6 +60,7 @@ int main() {
             while(std::getline(sp,path,':'))
             {
                 std::string fullPath=path+"/"+potentialcommand;
+                std::cout<<fullPath<<std::endl;
                 if(access(fullPath.c_str(), X_OK)==0)
                 {
                     std::string arg1,arg2;
