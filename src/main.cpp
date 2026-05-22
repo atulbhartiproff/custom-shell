@@ -45,7 +45,24 @@ int main() {
           {
               if(inp[i]!='\'')
               {
-                  word=word+""+inp[i];
+                  if(openQuo)
+                      word=word+""+inp[i];
+                  else
+                  {
+                      if(inp[i]==' ' && word.size()!=0)
+                      {
+                          finalword=finalword+" "+word;
+                          word="";
+                      }
+                      else if(inp[i]==' ')
+                      {
+                          continue;
+                      }
+                      else
+                      {
+                          word=word+""+inp[i];
+                      }
+                  }
               }
               else {
                     if(inp[i+1]=='\'')
@@ -68,6 +85,7 @@ int main() {
                     }
               }
           }
+          if(word.size()!=0) finalword=finalword+" "+word;
           std::cout<<finalword<<std::endl;
     }
     }
