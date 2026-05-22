@@ -55,28 +55,23 @@ int main() {
 
         if(!found)
         {
-            // std::string path_env = std::getenv("PATH");
-            // std::stringstream sp(path_env);
-            // std::string path;
-            // while(std::getline(sp,path,':'))
-            // {
-            //     std::string fullPath=path+"/"+potentialcommand;
-            //     if(access(fullPath.c_str(), X_OK)==0)
-            //     {
-            //         std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
-            //         found=true;
-            //         break;
-            //     }
-            // }
-
-
-            // if(!found)
-            //     std::cout << potentialcommand << ": not found" << std::endl;
-            //
-            if(executeCom(line)==-1)
+            std::string path_env = std::getenv("PATH");
+            std::stringstream sp(path_env);
+            std::string path;
+            while(std::getline(sp,path,':'))
             {
-                std::cout<<potentialcommand<<": not found"<<std::endl;
+                std::string fullPath=path+"/"+potentialcommand;
+                if(access(fullPath.c_str(), X_OK)==0)
+                {
+                    std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
+                    found=true;
+                    break;
+                }
             }
+
+
+            if(!found)
+                std::cout << potentialcommand << ": not found" << std::endl;
         }
     }
 
@@ -84,23 +79,10 @@ int main() {
     //Invalid parameter
     else
     {
-        bool found=false;
-        std::string path_env = std::getenv("PATH");
-        std::stringstream sp(path_env);
-        std::string path;
-        while(std::getline(sp,path,':'))
+        if(executeCom(line)==-1)
         {
-            std::string fullPath=path+"/"+command;
-            if(access(fullPath.c_str(), X_OK)==0)
-            {
-                std::system(line.c_str());
-                found=true;
-                break;
-            }
+            std::cout<<command<<": command not found"<<std::endl;
         }
-
-
-        if(!found)std::cout << command << ": command not found" << std::endl;
     };
   }
 }
