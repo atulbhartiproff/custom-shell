@@ -35,15 +35,32 @@ int main() {
           std::cout << word << " ";
         }
         std::cout << std::endl;
-      }
-      else {
-          std::string word; int i=0;
-      while(getline(ss, word,'\''))
-      {
-          if(i++==0) continue;
-          std::cout<<word<<" ";
-      }
-      std::cout<<std::endl;
+      } else {
+        std::string inp = line.substr(5, line.size());
+        bool openQuo = false;
+        std::string word = "";
+        for (int i = 0; i < inp.size(); i++) {
+          if (inp[i] == '\'') {
+            if (openQuo) {
+              openQuo = !(openQuo);
+              if (i + 1 < inp.size() && inp[i + 1] == '\'') {
+                i += 1;
+                continue;
+              } else {
+                std::cout << " " << word;
+                word = "";
+              }
+            } else {
+              openQuo = !(openQuo);
+              word = "";
+            }
+          }
+          else {
+          {
+              word=word+std::to_string(inp[i]);
+          }
+          }
+        }
       }
     }
 
