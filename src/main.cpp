@@ -95,7 +95,7 @@ int main() {
         }
 
 
-        if(!found)std::cout << potentialcommand << ": not found" << std::endl;
+        if(!found)std::cout << command << ": command not found" << std::endl;
     };
   }
 }
