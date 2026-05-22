@@ -86,14 +86,18 @@ int main() {
             std::string fullPath=path+"/"+command;
             if(access(fullPath.c_str(), X_OK)==0)
             {
-                std::string arg1,arg2;
-                ss>>arg1;
-                if(!(ss>>arg2))
-                {
-                    arg2=arg1;
-                    arg1=command;
+                std::vector<std::string> args;
+                args.push_back(command);
+                int i=0;
+                while (true) {
+                    if(!(ss>>args[i++])) break;
                 }
-                execlp(fullPath.c_str(), arg1.c_str(), arg2.c_str(),NULL);
+                std::vector<char*> argspoint;
+                for(i=0;i<args.size();i++)
+                {
+                    argspoint.push_back(&args[i][0]);
+                }
+                execvp(fullPath.c_str(),argspoint.data());
                 found=true;
                 break;
             }
