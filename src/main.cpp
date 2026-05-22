@@ -76,6 +76,7 @@ int main() {
                             openQuo=false;
                             if(finalword.size()==0) finalword=word;
                             else finalword=finalword+" "+word;
+                            word="";
                         }
                         else
                         {
