@@ -37,9 +37,10 @@ int main() {
         std::cout << std::endl;
       }
       else {
-          std::string word;
+          std::string word; int i=0;
       while(getline(ss, word,'\''))
       {
+          if(i++==0) continue;
           std::cout<<word<<" ";
       }
       std::cout<<std::endl;
