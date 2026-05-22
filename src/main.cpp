@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -70,6 +71,11 @@ int main() {
     {
         std::string targetDir;
         ss>>targetDir;
+        if(targetDir=="~")
+        {
+            std::string homeDir=std::getenv("HOME");
+            targetDir=homeDir;
+        }
         if(chdir(targetDir.c_str())!=0)
         {
             std::cout<<"cd: "<<targetDir<<": No such file or directory"<<std::endl;
