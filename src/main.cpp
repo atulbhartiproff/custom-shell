@@ -97,6 +97,7 @@ int main() {
                 {
                     argspoint.push_back(&arg[0]);
                 }
+                argspoint.push_back(nullptr);
                 execvp(fullPath.c_str(),argspoint.data());
                 found=true;
                 break;
