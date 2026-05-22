@@ -60,12 +60,9 @@ int main() {
             while(std::getline(sp,path,':'))
             {
                 std::string fullPath=path+"/"+potentialcommand;
-                std::cout<<fullPath<<std::endl;
                 if(access(fullPath.c_str(), X_OK)==0)
                 {
-                    std::string arg1,arg2;
-                    sp>>arg1;sp>>arg2;
-                    execlp(fullPath.c_str(), arg1.c_str(), arg2.c_str(),NULL);
+                    std::cout<<potentialcommand<<" is "<<fullPath<<std::endl;
                     found=true;
                     break;
                 }
@@ -79,6 +76,26 @@ int main() {
 
     //Invalid parameter
     else
-      std::cout << command << ": command not found" << std::endl;
+    {
+        bool found=false;
+        std::string path_env = std::getenv("PATH");
+        std::stringstream sp(path_env);
+        std::string path;
+        while(std::getline(sp,path,':'))
+        {
+            std::string fullPath=path+"/"+command;
+            if(access(fullPath.c_str(), X_OK)==0)
+            {
+                std::string arg1,arg2;
+                ss>>arg1;ss>>arg2;
+                execlp(fullPath.c_str(), arg1.c_str(), arg2.c_str(),NULL);
+                found=true;
+                break;
+            }
+        }
+
+
+        if(!found)std::cout << potentialcommand << ": not found" << std::endl;
+    };
   }
 }
