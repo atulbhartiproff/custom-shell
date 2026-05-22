@@ -86,12 +86,6 @@ int main() {
             std::string fullPath=path+"/"+command;
             if(access(fullPath.c_str(), X_OK)==0)
             {
-                std::string finalcom=command;
-                std::string arg;
-                while(ss>>arg)
-                {
-                    finalcom=finalcom+" "+arg;
-                }
                 std::system(line.c_str());
                 found=true;
                 break;
