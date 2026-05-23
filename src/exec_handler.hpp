@@ -28,6 +28,7 @@ inline int executeCom(std::string& command)
                 else file+=command[i];
             }
         }
+        file="\'"+file+"\'";
     }
     std::string path_env= std::getenv("PATH");
 
