@@ -22,7 +22,7 @@ inline int arrowHandle(std::string& input, std::string& target)
            myFile.open(filename);
         }
             std::ofstream file(filename);
-            file<<input;
+            file<<input<<std::endl;
             return 1;
     }
     return -1;
