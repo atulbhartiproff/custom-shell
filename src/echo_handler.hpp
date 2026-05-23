@@ -31,14 +31,24 @@ inline int echoHandle(std::string& line)
             i++;
         }
         else {
-            //If the single quotes is inside the double quote, just append
-            if(dquo && inp[i]=='\'') arg+=inp[i];
-            //if single quote outside, start the single quotes era
-            else if(inp[i]=='\'') squo=!squo;
-            //if double quote outside, start the double quotes era
-            else if(inp[i]=='\"') dquo=!dquo;
-            //If none of them, add literal to the arg
-            else arg+=inp[i];
+            //Logic for inside Double Quotes
+            if(dquo)
+            {
+                if(inp[i]=='\"') dquo=!dquo;
+                else arg+=inp[i];
+            }
+            //Logic for inside Single Quotes
+            else if(squo)
+            {
+                if(inp[i]=='\'') squo=!squo;
+                else arg+=inp[i];
+            }
+            //For everything outside Quotes
+            else {
+                if(inp[i]=='\"') dquo=!dquo;
+                else if(inp[i]=='\'') squo+!squo;
+                else arg+=inp[i];
+            }
         }
     }
     //Add final word into vector
