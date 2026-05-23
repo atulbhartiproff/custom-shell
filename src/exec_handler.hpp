@@ -7,7 +7,7 @@
 inline int executeCom(std::string& command)
 {
     std::string file;
-    if(command[0]!='\'' || command[0]!='\"'){
+    if(command[0]!='\'' && command[0]!='\"'){
     std::stringstream ss(command);
     ss>>file;
     }
@@ -28,7 +28,6 @@ inline int executeCom(std::string& command)
                 else file+=command[i];
             }
         }
-        file="\'"+file+"\'";
     }
     std::string path_env= std::getenv("PATH");
 
