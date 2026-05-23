@@ -6,10 +6,29 @@
 
 inline int executeCom(std::string& command)
 {
-    std::stringstream ss(command);
     std::string file;
+    if(command[0]!='\'' || command[0]!='\"'){
+    std::stringstream ss(command);
     ss>>file;
+    }
+    else {
+        bool squo=false,dquo=false;
+        if(command[0]=='\'') squo=true;
+        else dquo=true;
 
+        for(int i=1;i<command.size();i++)
+        {
+            if(dquo)
+            {
+                if(command[i]=='\"') break;
+                else file+=command[i];
+            }
+            else {
+                if(command[i]=='\'') break;
+                else file+=command[i];
+            }
+        }
+    }
     std::string path_env= std::getenv("PATH");
 
     std::stringstream sp(path_env);
