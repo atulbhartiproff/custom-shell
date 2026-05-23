@@ -18,7 +18,7 @@ inline int echoHandle(std::string& line)
 
         // > Operator handling
 
-        if(inp[i]=='>')
+        if(inp[i]=='>' || (inp[i]=='1' && i+1!=inp.size() && inp[i+1]=='>'))
         {
             finalarg.push_back(arg);
             arg="";
@@ -26,7 +26,7 @@ inline int echoHandle(std::string& line)
             for(int i=1;i<finalarg.size();i++) arg+=" "+finalarg[i];
             std::string destination=inp.substr(i+1,inp.size());
 
-            if(arg[arg.size()-1]=='1') arg=arg.substr(0,arg.size()-2);
+            // if(arg[arg.size()-1]=='1') arg=arg.substr(0,arg.size()-2);
 
             if(arrowHandle(arg,destination)==1) return 1;
             return 1;
