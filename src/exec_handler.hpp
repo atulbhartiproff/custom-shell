@@ -18,10 +18,10 @@ inline int executeCom(std::string& command)
 
         for(int i=1;i<command.size();i++)
         {
-            if(command[i]=='\\') file+=command[i]+'\\';
             if(dquo)
             {
-                if(command[i]=='\"') break;
+                if(command[i]=='\\' && i+1<command.size()) file+=command[++i];
+                else if(command[i]=='\"') break;
                 else file+=command[i];
             }
             else {
