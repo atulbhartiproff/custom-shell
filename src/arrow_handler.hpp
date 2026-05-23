@@ -16,12 +16,14 @@ inline int arrowHandle(std::string& input, std::string& target)
     while(std::getline(sp,curr,':'))
     {
         curr=curr+filename;
-        if(access(curr.c_str(),W_OK)==0)
+        if(access(curr.c_str(),W_OK)!=0)
         {
+            std::ofstream myFile;
+           myFile.open(curr);
+        }
             std::ofstream file(curr);
             file<<input;
             return 1;
-        }
     }
     return -1;
 }
