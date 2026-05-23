@@ -1,127 +1,42 @@
 
 
 #include <iostream>
-#include <sstream>
 #include <string>
+#include <vector>
 
 inline int echoHandle(std::string& line)
 {
-    //Simple echo with no quotes in it
-    if (line.find("\'") == std::string::npos && line.find("\"") == std::string::npos) {
-      std::string word;
-      std::stringstream ss(line);
-      ss>>word;
-      while (ss >> word) {
-        std::cout << word << " ";
-      }
-      std::cout << std::endl;
-    }
-    //echo with single quotes in it
-    else if(line.find("\"") != std::string::npos){
-        std::string inp=line.substr(5,line.size());
-        std::string word="";
-        std::string finalword="";
-        bool openQuo=false;
-        for(int i=0;i<inp.size();i++)
+    std::string inp=line.substr(5,line.size());
+    bool squo=false,dquo=false;
+    //Boolean flags for single quote is open
+    // or
+    //double quotes is opened
+    std::string arg="";
+    std::vector<std::string> finalarg;
+    for(int i=0;i<line.size();i++)
+    {
+        // Space seperating two arguments which arent enclose in quotes
+        if(inp[i]==' ' && !(squo || dquo))
         {
-            if(inp[i]!='\"')
-            {
-                if(openQuo)
-                    word=word+""+inp[i];
-                else
-                {
-                    if(inp[i]==' ' && word.size()!=0)
-                    {
-                        finalword=finalword+" "+word;
-                        word="";
-                    }
-                    else if(inp[i]==' ')
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        word=word+""+inp[i];
-                    }
-                }
-            }
-            else {
-                  if(inp[i+1]=='\"')
-                  {
-                      i+=1;
-                      continue;
-                  }
-                  else {
-                      if(openQuo)
-                      {
-                          openQuo=false;
-                          if(finalword.size()==0) finalword=word;
-                          else finalword=finalword+" "+word;
-                          word="";
-                      }
-                      else
-                      {
-                          openQuo=true;
-                          word="";
-                      }
-                  }
-            }
+            if(arg.size()!=0) finalarg.push_back(arg);
+            arg="";
         }
-        if(word.size()!=0) finalword=finalword+" "+word;
-        std::cout<<finalword<<std::endl;
-    }
-    else{
-        std::string inp=line.substr(5,line.size());
-        std::string word="";
-        std::string finalword="";
-        bool openQuo=false;
-        for(int i=0;i<inp.size();i++)
+        // Backslash used outside any quotes
+        else if(inp[i]=='\\' && !(squo || dquo))
         {
-            if(inp[i]!='\'')
-            {
-                if(openQuo)
-                    word=word+""+inp[i];
-                else
-                {
-                    if(inp[i]==' ' && word.size()!=0)
-                    {
-                        finalword=finalword+" "+word;
-                        word="";
-                    }
-                    else if(inp[i]==' ')
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        word=word+""+inp[i];
-                    }
-                }
-            }
-            else {
-                  if(inp[i+1]=='\'')
-                  {
-                      i+=1;
-                      continue;
-                  }
-                  else {
-                      if(openQuo)
-                      {
-                          openQuo=false;
-                          if(finalword.size()==0) finalword=word;
-                          else finalword=finalword+" "+word;
-                          word="";
-                      }
-                      else
-                      {
-                          openQuo=true;
-                          word="";
-                      }
-                  }
-            }
+            arg+=inp[i+1];
+            i++;
         }
-        if(word.size()!=0) finalword=finalword+" "+word;
-        std::cout<<finalword<<std::endl;
-  }
+        else {
+            if(dquo && inp[i]=='\'') arg+=inp[i];
+            else if(inp[i]=='\'') squo=!squo;
+            else if(inp[i]=='\"') dquo=!dquo;
+            else arg+=inp[i];
+        }
+    }
+
+    if(finalarg.size()==0) return 0;
+    else std::cout<<finalarg[0];
+    for(int i=1;i<finalarg.size();i++) std::cout<<" "<<finalarg[i];
     return 1;
 }
