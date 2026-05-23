@@ -6,7 +6,8 @@
 
 inline int echoHandle(std::string& line)
 {
-    if (line.find("\'") == std::string::npos) {
+    //Simple echo with no quotes in it
+    if (line.find("\'") == std::string::npos && line.find("\'") == std::string::npos) {
       std::string word;
       std::stringstream ss(line);
       ss>>word;
@@ -14,7 +15,9 @@ inline int echoHandle(std::string& line)
         std::cout << word << " ";
       }
       std::cout << std::endl;
-    } else {
+    }
+    //echo with single quotes in it
+    else {
         std::string inp=line.substr(5,line.size());
         std::string word="";
         std::string finalword="";
