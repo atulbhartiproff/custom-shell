@@ -18,6 +18,7 @@ inline int executeCom(std::string& command)
 
         for(int i=1;i<command.size();i++)
         {
+            if(command[i]=='\\') file+=command[++i];
             if(dquo)
             {
                 if(command[i]=='\"') break;
