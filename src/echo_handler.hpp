@@ -34,7 +34,8 @@ inline int echoHandle(std::string& line)
             //Logic for inside Double Quotes
             if(dquo)
             {
-                if(inp[i]=='\"') dquo=!dquo;
+                if(inp[i]=='\\') arg+=inp[++i];
+                else if(inp[i]=='\"') dquo=!dquo;
                 else arg+=inp[i];
             }
             //Logic for inside Single Quotes
