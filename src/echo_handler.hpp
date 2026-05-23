@@ -22,7 +22,7 @@ inline int echoHandle(std::string& line)
             arg="";
         }
         // Backslash used outside any quotes
-        else if(inp[i]=='\\' && !(squo || dquo))
+        else if(i!=n-1 && inp[i]=='\\' && !(squo || dquo))
         {
             arg+=inp[i+1];
             i++;
@@ -34,9 +34,10 @@ inline int echoHandle(std::string& line)
             else arg+=inp[i];
         }
     }
-
+    if(arg.size()!=0) finalarg.push_back(arg);
     if(finalarg.size()==0) return 0;
     else std::cout<<finalarg[0];
     for(int i=1;i<finalarg.size();i++) std::cout<<" "<<finalarg[i];
+    std::cout<<std::endl;
     return 1;
 }
