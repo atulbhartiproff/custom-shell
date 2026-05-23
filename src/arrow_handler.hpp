@@ -19,9 +19,9 @@ inline int arrowHandle(std::string& input, std::string& target)
         if(access(curr.c_str(),W_OK)!=0)
         {
             std::ofstream myFile;
-           myFile.open(curr);
+           myFile.open(filename);
         }
-            std::ofstream file(curr);
+            std::ofstream file(filename);
             file<<input;
             return 1;
     }
