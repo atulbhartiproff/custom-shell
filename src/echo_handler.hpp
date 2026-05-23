@@ -22,7 +22,7 @@ inline int echoHandle(std::string& line)
         {
             finalarg.push_back(arg);
             arg="";
-            if(finalarg.size()!=0) arg+=finalarg[i];
+            if(finalarg.size()!=0) arg+=finalarg[0];
             for(int i=1;i<finalarg.size();i++) arg+=" "+finalarg[i];
             std::string destination=inp.substr(i+1,inp.size());
             if(arrowHandle(arg,destination)==1) return 1;
