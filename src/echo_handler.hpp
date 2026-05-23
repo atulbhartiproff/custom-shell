@@ -25,6 +25,9 @@ inline int echoHandle(std::string& line)
             if(finalarg.size()!=0) arg+=finalarg[0];
             for(int i=1;i<finalarg.size();i++) arg+=" "+finalarg[i];
             std::string destination=inp.substr(i+1,inp.size());
+
+            if(arg[arg.size()-1]=='1') arg=arg.substr(0,arg.size()-2);
+
             if(arrowHandle(arg,destination)==1) return 1;
             return 1;
         }
