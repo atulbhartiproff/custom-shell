@@ -13,7 +13,7 @@ inline int echoHandle(std::string& line)
     //double quotes is opened
     std::string arg="";
     std::vector<std::string> finalarg;
-    for(int i=0;i<line.size();i++)
+    for(int i=0;i<inp.size();i++)
     {
         // Space seperating two arguments which arent enclose in quotes
         if(inp[i]==' ' && !(squo || dquo))
