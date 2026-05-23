@@ -46,7 +46,7 @@ inline int echoHandle(std::string& line)
             //For everything outside Quotes
             else {
                 if(inp[i]=='\"') dquo=!dquo;
-                else if(inp[i]=='\'') squo+!squo;
+                else if(inp[i]=='\'') squo=!squo;
                 else arg+=inp[i];
             }
         }
