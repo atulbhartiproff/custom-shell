@@ -1,5 +1,5 @@
 
-
+#include "arrow_handler.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,6 +15,20 @@ inline int echoHandle(std::string& line)
     std::vector<std::string> finalarg;
     for(int i=0;i<inp.size();i++)
     {
+
+        // > Operator handling
+
+        if(inp[i]=='>')
+        {
+            finalarg.push_back(arg);
+            arg="";
+            if(finalarg.size()!=0) arg+=finalarg[i];
+            for(int i=1;i<finalarg.size();i++) arg+=" "+finalarg[i];
+            std::string destination=inp.substr(i,inp.size());
+            if(arrowHandle(arg,destination)==1) return 1;
+            return 1;
+        }
+
         // Space seperating two arguments which arent enclose in quotes
         // We will use every space outside quotes as the breaking point of words
         // Since consecutive quotes is append and space is the only place where we can completely change words
