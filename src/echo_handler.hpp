@@ -37,6 +37,7 @@ inline int echoHandle(std::string &line) {
       }
 
       if (inp[i + 1] == '>') {
+          destination=destination.substr(1,destination.size());
         if(appendStdout(arg, destination)==1) return 1;
         return -1;
       }

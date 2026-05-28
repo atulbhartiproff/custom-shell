@@ -17,6 +17,5 @@ inline int appendStdout(std::string& input, std::string& target)
     write(fd,"/n",1);
 
     close(fd);
-    std::cout<<input<<std::endl;
     return 1;
 }
