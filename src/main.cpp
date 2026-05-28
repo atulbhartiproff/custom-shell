@@ -19,11 +19,16 @@ int main() {
 
   while (true) {
     std::cout << "$ ";
-
+    command.clear();
     std::getline(std::cin, line);
     std::stringstream ss(line);
     ss >> command;
-
+    if(command.size()==0) continue;
+    if(command.size()<4)
+    {
+        std::cout<<"Invalid Command"<<std::endl;
+        continue;
+    }
     // EXIT COMMAND - Exits the shell
     if (command == "exit")
       break;
