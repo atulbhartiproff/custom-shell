@@ -34,14 +34,15 @@ inline int echoHandle(std::string &line) {
         if (stderrRedirect(arg, destination) == 1)
           return 1;
         return -1;
-      } else if (arg[arg.size() - 1] == '>') {
-          if (arg[arg.size() - 2] == '1')
-            arg = arg.substr(0, arg.size() - 3);
+      }
+
+      else if (inp[i + 1] == '>') {
+        if (arg[arg.size() - 1] == '1')
           arg = arg.substr(0, arg.size() - 2);
-        if (appendStdout(arg, destination) == 1)
-          return 1;
+        if(appendStdout(arg, destination)==1) return 1;
         return -1;
       }
+
       if (arrowHandle(arg, destination) == 1)
         return 1;
       return 1;
