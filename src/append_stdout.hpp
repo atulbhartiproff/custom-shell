@@ -14,7 +14,7 @@ inline int appendStdout(std::string& input, std::string& target)
     int fd=open(filename.c_str(),O_WRONLY | O_CREAT | O_APPEND, 0644);
     if(fd<0) return -1;
     write(fd,input.c_str(),input.size());
-    write(fd,"/n",1);
+    write(fd,"\n",1);
 
     close(fd);
     return 1;
