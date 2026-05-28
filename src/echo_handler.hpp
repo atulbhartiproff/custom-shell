@@ -36,9 +36,7 @@ inline int echoHandle(std::string &line) {
         return -1;
       }
 
-      else if (inp[i + 1] == '>') {
-        if (arg[arg.size() - 1] == '1')
-          arg = arg.substr(0, arg.size() - 2);
+      if (inp[i + 1] == '>') {
         if(appendStdout(arg, destination)==1) return 1;
         return -1;
       }
