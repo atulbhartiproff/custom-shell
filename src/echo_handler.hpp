@@ -1,5 +1,6 @@
 
 #include "arrow_handler.hpp"
+#include "stderr_redirect.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,7 +28,11 @@ inline int echoHandle(std::string& line)
             std::string destination=inp.substr(i+1,inp.size());
 
             if(arg[arg.size()-1]=='1') arg=arg.substr(0,arg.size()-2);
-
+            if(arg[arg.size()-1]=='2') {
+                arg=arg.substr(0,arg.size()-2);
+                if(stderrRedirect(arg,destination)==1) return 1;
+                return -1;
+            }
             if(arrowHandle(arg,destination)==1) return 1;
             return 1;
         }
