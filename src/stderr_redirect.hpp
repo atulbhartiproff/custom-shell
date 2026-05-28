@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include<unistd.h>
 #include <sstream>
 #include <string>
@@ -14,5 +15,6 @@ inline int stderrRedirect(std::string& input, std::string& target)
     if(fd<0) return -1;
     dup2(fd, STDERR_FILENO);
     close(fd);
+    std::cout<<input<<std::endl;
     return 1;
 }
