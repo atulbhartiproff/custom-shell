@@ -1,34 +1,38 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/cb8f4a7b-0452-41ad-8e4e-5eca578eb58d)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# Custom Shell
 
-This is a starting point for C++ solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+A lightweight custom shell built purely in c++.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+## Features
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+- Interactive REPL with a `$ ` prompt
+- Built-in commands:
+  - `echo`
+  - `exit`
+  - `pwd`
+  - `cd`, including `cd ~`
+  - `type`
+- External command execution through the system `PATH`
+- Current-directory fallback in `PATH` so local executables can be run easily
+- Quote handling for single and double quoted arguments
+- Backslash escaping for unquoted and double-quoted input
+- Output redirection with `>`
+- Append redirection with `>>`
+- Error redirection with `2>`
 
-# Passing the first stage
+## Project Structure
 
-The entry point for your `shell` implementation is in `src/main.cpp`. Study and
-uncomment the relevant code, then run the command below to execute the tests on
-our servers:
+- `src/main.cpp` contains the shell loop and builtin command dispatch
+- `src/echo_handler.hpp` parses `echo` input and handles redirection cases
+- `src/exec_handler.hpp` runs external commands
+- `src/type_handler.hpp` resolves command locations in `PATH`
+- `src/arrow_handler.hpp` handles `>` redirection
+- `src/append_stdout.hpp` handles `>>` redirection
+- `src/stderr_redirect.hpp` handles `2>` redirection
 
-```sh
-codecrafters submit
-```
+## Run
 
-Time to move on to the next stage!
+Get the latest version from release. 
 
-# Stage 2 & beyond
+## Issues
 
-Note: This section is for stages 2 and beyond.
-
-1. Ensure you have `cmake` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `src/main.cpp`.
-1. Run `codecrafters submit` to submit your solution to CodeCrafters. Test
-   output will be streamed to your terminal.
+- Windows testing still waiting.
